@@ -386,6 +386,21 @@ a:focus-visible {
   font-size: 14px;
 }
 
+/* Fixed box so wordmark lockups and the near-square N sit on one baseline. */
+.role__logo {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  margin-top: var(--s-lg);
+}
+
+.role__logo img {
+  max-width: 190px;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
 .role__title {
   margin: 0;
 }

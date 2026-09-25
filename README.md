@@ -16,6 +16,7 @@ python3 -m http.server 8000
 index.html    # intro, experience, footer
 styles.css    # design tokens + all component styles
 assets/       # portrait, Monet background, favicon
+assets/logos/ # organization marks shown beside each role
 ```
 
 The page is: a full-bleed intro over the painting, an experience list, and a
@@ -46,15 +47,35 @@ Tokens live in `:root` at the top of `styles.css`.
 
 ## Photography
 
-`assets/mariana-portrait.jpg` is a square crop of `IMG_3869.HEIC`:
+`assets/mariana-portrait.jpg` is a square crop of `IMG_7995.HEIC`:
 
 ```sh
-sips -s format jpeg -s formatOptions best IMG_3869.HEIC --out full.jpg
-ffmpeg -i full.jpg -vf "crop=1600:1600:1340:620,scale=760:760" -q:v 3 assets/mariana-portrait.jpg
+sips -s format jpeg -s formatOptions best IMG_7995.HEIC --out full.jpg
+ffmpeg -i full.jpg -vf "crop=1613:1613:730:1972,scale=760:760" -q:v 3 assets/mariana-portrait.jpg
 ```
 
-The x offset of 1340 is deliberate: anything further left catches the door
-frame at the edge of the original frame.
+The source carries an EXIF rotation. `sips -g` reports it as 4032x3024
+landscape, but ffmpeg auto-applies the rotation, so those crop coordinates are
+in upright 3024x4032 space. `sips -Z 4032` will *not* bake the rotation in —
+it skips the resample when the long edge already matches.
+
+## Logos
+
+| Role | File | Source |
+|---|---|---|
+| Beth Israel Deaconess | `bidmc.svg` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Beth_Israel_Deaconess_Medical_Center_logo.svg) — public domain |
+| Apfeld lab, Northeastern | `northeastern.svg` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Northeastern_Huskies_logo.svg) — public domain |
+| DREAM Orchard Gardens | `dream.png` | [dreamprogram.org](https://www.dreamprogram.org/) |
+| New York Proton Center | `ny-proton-center.png` | [nyproton.com](https://www.nyproton.com/) |
+
+Three were trimmed so they stay legible in a 190px column: the BIDMC SVG's
+`viewBox` is cropped to `0 93 921.83 64` to drop the "Beth Israel Lahey Health"
+parent line, and the two PNGs had their taglines cropped off. The originals are
+linked above.
+
+These are third-party trademarks, shown to identify where Mariana has worked.
+That is ordinary nominative use on a personal portfolio, but none of these
+organizations have endorsed the site.
 
 ## Copy
 
