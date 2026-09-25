@@ -1,37 +1,29 @@
 /* ==========================================================================
    Mariana Roa — portfolio
-   Sage adaptation of the DESIGN-stripe.md system.
-   Indigo → sage green; gradient mesh → sage/mint/cream wash.
-   Palette tones sampled from adaline.ai.
+   Sage adaptation of the DESIGN-stripe.md system; greens sampled from
+   adaline.ai. Hero backdrop is Monet's "Antibes, Afternoon Effect" (MFA).
    ========================================================================== */
 
 /* ---- Tokens -------------------------------------------------------------- */
 
 :root {
-  /* Brand & accent */
   --primary: #4a6d47;
   --primary-deep: #3a4a37;
   --primary-press: #2a332a;
   --primary-soft: #6d8f69;
   --primary-subdued: #d8e3dd;
-  --teal: #2b6b5e;
-  --brand-dark-900: #142214;
 
-  /* Surface */
   --canvas: #fdfefb;
   --canvas-soft: #fafbf7;
   --canvas-sage: #f1f5ef;
-  --canvas-cream: #f4efe4;
   --hairline: #e1e6df;
   --hairline-strong: #ccd9d3;
 
-  /* Text */
   --ink: #2a332a;
   --ink-secondary: #3a4a37;
   --ink-mute: #62705f;
   --on-primary: #ffffff;
 
-  /* Radius */
   --r-xs: 4px;
   --r-sm: 6px;
   --r-md: 8px;
@@ -39,8 +31,6 @@
   --r-xl: 16px;
   --r-pill: 9999px;
 
-  /* Spacing */
-  --s-xxs: 2px;
   --s-xs: 4px;
   --s-sm: 8px;
   --s-md: 12px;
@@ -49,9 +39,8 @@
   --s-xxl: 32px;
   --s-huge: 64px;
 
-  /* Elevation */
   --lift-1: 0 1px 3px rgba(42, 51, 42, 0.08);
-  --lift-2: 0 8px 24px rgba(42, 51, 42, 0.08), 0 2px 6px rgba(42, 51, 42, 0.04);
+  --lift-2: 0 8px 24px rgba(42, 51, 42, 0.12), 0 2px 6px rgba(42, 51, 42, 0.06);
 
   --container: 1120px;
 }
@@ -65,7 +54,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -102,27 +90,14 @@ blockquote {
   margin: 0;
 }
 
-/* ---- Type scale ---------------------------------------------------------- */
-
 h1,
 h2,
-h3,
-h4 {
+h3 {
   margin: 0;
   font-weight: 300;
 }
 
-.display-xxl {
-  font-size: 56px;
-  line-height: 1.03;
-  letter-spacing: -1.4px;
-}
-
-.display-xl {
-  font-size: 48px;
-  line-height: 1.15;
-  letter-spacing: -0.96px;
-}
+/* ---- Type ---------------------------------------------------------------- */
 
 .display-lg {
   font-size: 32px;
@@ -130,32 +105,10 @@ h4 {
   letter-spacing: -0.64px;
 }
 
-.display-md {
-  font-size: 26px;
-  line-height: 1.12;
-  letter-spacing: -0.26px;
-}
-
 .heading-lg {
   font-size: 22px;
   line-height: 1.1;
   letter-spacing: -0.22px;
-}
-
-.heading-md {
-  font-size: 20px;
-  line-height: 1.4;
-  letter-spacing: -0.2px;
-}
-
-.heading-sm {
-  font-size: 18px;
-  line-height: 1.4;
-}
-
-.body-lg {
-  font-size: 16px;
-  line-height: 1.55;
 }
 
 .caption {
@@ -166,34 +119,9 @@ h4 {
   font-feature-settings: "tnum";
 }
 
-/* Money / counts / dates — the tabular-figure signal from the source system. */
 .tnum {
   font-feature-settings: "tnum";
   letter-spacing: -0.42px;
-}
-
-.eyebrow {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: 0.1px;
-  text-transform: uppercase;
-  color: var(--primary-deep);
-  background: var(--primary-subdued);
-  border-radius: var(--r-pill);
-  padding: var(--s-xs) var(--s-sm);
-}
-
-.lead {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--ink-secondary);
-  max-width: 54ch;
-}
-
-.mute {
-  color: var(--ink-mute);
 }
 
 /* ---- Layout -------------------------------------------------------------- */
@@ -209,32 +137,12 @@ h4 {
   padding: 96px 0;
 }
 
-.section--tight {
-  padding: 64px 0;
-}
-
-/* The mesh already provides breathing room; don't double up under the hero. */
 .hero + .section {
-  padding-top: 16px;
+  padding-top: 72px;
 }
 
-.section--soft {
-  background: var(--canvas-soft);
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-}
-
-.section-head {
-  max-width: 62ch;
-  margin-bottom: 48px;
-}
-
-.section-head .display-lg {
-  margin-top: var(--s-md);
-}
-
-.section-head .lead {
-  margin: var(--s-lg) 0 0;
+.section-title {
+  margin-bottom: 40px;
 }
 
 /* ---- Buttons ------------------------------------------------------------- */
@@ -243,7 +151,6 @@ h4 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--s-sm);
   min-height: 40px;
   padding: var(--s-sm) var(--s-lg);
   border-radius: var(--r-pill);
@@ -254,8 +161,7 @@ h4 {
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .btn--primary {
@@ -272,7 +178,7 @@ h4 {
 }
 
 .btn--secondary {
-  background: var(--canvas);
+  background: transparent;
   color: var(--primary);
   border-color: var(--primary);
 }
@@ -287,6 +193,7 @@ h4 {
 }
 
 .btn:focus-visible,
+.dialog__close:focus-visible,
 a:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
@@ -295,139 +202,113 @@ a:focus-visible {
 
 /* ---- Nav ----------------------------------------------------------------- */
 
+/* Sits on the painting: no background, no rule, no chrome. */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(253, 254, 251, 0.72);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 10;
 }
 
 .nav__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-xl);
-  padding-top: var(--s-lg);
-  padding-bottom: var(--s-lg);
+  padding-block: var(--s-xl);
 }
 
 .nav__mark {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 24px;
+  letter-spacing: -0.3px;
   text-decoration: none;
-  font-size: 16px;
-  letter-spacing: -0.2px;
-  white-space: nowrap;
-}
-
-.nav__dot {
-  width: 22px;
-  height: 22px;
-  border-radius: var(--r-pill);
-  background: linear-gradient(140deg, var(--primary-soft), var(--teal));
-  flex: none;
-}
-
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: var(--s-xl);
-}
-
-.nav__links a {
-  text-decoration: none;
-  color: var(--ink-mute);
-  font-size: 15px;
-  transition: color 0.15s ease;
-}
-
-.nav__links a:hover {
   color: var(--ink);
-}
-
-/* ---- Gradient mesh ------------------------------------------------------- */
-
-.mesh {
-  /* Extends above the hero so the wash runs behind the translucent nav. */
-  position: absolute;
-  inset: -76px 0 0 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.mesh svg {
-  width: 100%;
-  height: 100%;
-}
-
-.mesh::after {
-  /* fade the wash into the canvas at the bottom edge */
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 45%;
-  background: linear-gradient(
-    to bottom,
-    rgba(253, 254, 251, 0),
-    rgba(253, 254, 251, 0.85) 62%,
-    var(--canvas)
-  );
 }
 
 /* ---- Hero ---------------------------------------------------------------- */
 
 .hero {
   position: relative;
+  isolation: isolate;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("assets/monet-antibes.jpg");
+  background-size: cover;
+  background-position: center 42%;
+}
+
+/* Warm-white scrim: heavy on the left so the copy reads, clearing to the
+   right so the painting stays visible behind the portrait. */
+.hero__bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(253, 254, 251, 0.9) 0%,
+    rgba(253, 254, 251, 0.66) 26%,
+    rgba(253, 254, 251, 0.14) 52%,
+    rgba(253, 254, 251, 0) 78%
+  );
+}
+
+/* Dissolve the painting into the page below it. */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 14%;
+  background: linear-gradient(to bottom, rgba(253, 254, 251, 0), var(--canvas));
 }
 
 .hero__inner {
-  position: relative;
-  z-index: 1;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: var(--s-huge);
   align-items: center;
-  padding-block: 80px 88px;
+  min-height: 640px;
+  padding-block: 136px 104px;
 }
 
-.hero__copy .display-xxl {
-  margin: var(--s-xl) 0 0;
+/* Soft halo so the copy clears the painting's busy mid-ground. */
+.hero__copy {
+  position: relative;
 }
 
-.hero__copy .lead {
-  margin: var(--s-xl) 0 0;
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -56px -96px -56px -140px;
+  background: radial-gradient(
+    ellipse at 42% 50%,
+    rgba(253, 254, 251, 0.95) 0%,
+    rgba(253, 254, 251, 0.8) 42%,
+    rgba(253, 254, 251, 0) 74%
+  );
 }
 
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-md);
-  margin-top: var(--s-xxl);
+.hero__title {
+  font-size: 60px;
+  line-height: 1.04;
+  letter-spacing: -1.5px;
 }
 
-.hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-sm) var(--s-xl);
-  margin-top: 40px;
-  padding-top: var(--s-xl);
-  border-top: 1px solid var(--hairline);
-  color: var(--ink-mute);
+.hero__text {
+  margin: var(--s-xl) 0 var(--s-xxl);
+  max-width: 46ch;
+  font-size: 19px;
+  line-height: 1.55;
+  letter-spacing: -0.2px;
+  color: var(--ink-secondary);
 }
 
 .hero__portrait {
-  position: relative;
   border-radius: var(--r-lg);
   overflow: hidden;
-  box-shadow: var(--lift-2);
-  background: var(--canvas);
   aspect-ratio: 27 / 40;
+  border: 6px solid var(--canvas);
+  box-shadow: 0 18px 48px rgba(42, 51, 42, 0.26),
+    0 2px 8px rgba(42, 51, 42, 0.12);
 }
 
 .hero__portrait img {
@@ -436,134 +317,7 @@ a:focus-visible {
   object-fit: cover;
 }
 
-.hero__caption {
-  position: absolute;
-  left: var(--s-lg);
-  bottom: var(--s-lg);
-  right: var(--s-lg);
-  background: rgba(253, 254, 251, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-md);
-  padding: var(--s-md) var(--s-lg);
-}
-
-.hero__caption strong {
-  display: block;
-  font-weight: 400;
-  font-size: 15px;
-}
-
-/* ---- Stat strip ---------------------------------------------------------- */
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-.stat {
-  background: var(--canvas);
-  padding: var(--s-xxl);
-}
-
-.stat__num {
-  font-size: 32px;
-  line-height: 1.1;
-  letter-spacing: -0.64px;
-  font-feature-settings: "tnum";
-  color: var(--primary-deep);
-}
-
-.stat__label {
-  margin-top: var(--s-sm);
-  max-width: 26ch;
-  color: var(--ink-mute);
-  font-size: 14px;
-}
-
-/* ---- Cards --------------------------------------------------------------- */
-
-.card {
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-lg);
-  padding: var(--s-xxl);
-  box-shadow: var(--lift-1);
-}
-
-.card--sage {
-  background: var(--canvas-sage);
-  border-color: var(--hairline-strong);
-  box-shadow: none;
-}
-
-.card--dark {
-  background: var(--brand-dark-900);
-  border-color: var(--brand-dark-900);
-  color: var(--canvas);
-}
-
-.card--dark .mute {
-  color: var(--primary-subdued);
-}
-
-/* ---- About --------------------------------------------------------------- */
-
-.about {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: var(--s-huge);
-  align-items: start;
-}
-
-.about__media {
-  position: sticky;
-  top: 104px;
-}
-
-.about__photo {
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  border: 1px solid var(--hairline);
-  box-shadow: var(--lift-1);
-}
-
-.about__photo img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-}
-
-.about__quote {
-  margin: var(--s-xl) 0 0;
-  padding: var(--s-xl);
-  background: var(--canvas-sage);
-  border-radius: var(--r-lg);
-  font-size: 18px;
-  line-height: 1.5;
-  letter-spacing: -0.2px;
-  color: var(--ink-secondary);
-}
-
-.prose p {
-  margin: 0 0 var(--s-xl);
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--ink-secondary);
-  max-width: 62ch;
-}
-
-.prose p:last-child {
-  margin-bottom: 0;
-}
-
-/* ---- Timeline ------------------------------------------------------------ */
+/* ---- Experience ---------------------------------------------------------- */
 
 .timeline {
   display: grid;
@@ -584,11 +338,6 @@ a:focus-visible {
 .role:hover {
   border-color: var(--hairline-strong);
   box-shadow: var(--lift-1);
-}
-
-.role--feature {
-  border-color: var(--primary-subdued);
-  background: linear-gradient(180deg, #f5f9f3 0%, var(--canvas) 55%);
 }
 
 .role__when {
@@ -638,172 +387,83 @@ a:focus-visible {
   background: var(--primary-soft);
 }
 
-/* ---- Kids band ----------------------------------------------------------- */
+/* ---- Contact dialog ------------------------------------------------------ */
 
-.band {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--r-xl);
-  background: linear-gradient(135deg, #e8f0e5 0%, #dfeae4 45%, #f4efe4 100%);
-  padding: var(--s-huge);
-}
-
-.band__grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: var(--s-huge);
-  align-items: center;
-}
-
-.band__facts {
-  display: grid;
-  gap: var(--s-md);
-}
-
-.fact {
-  display: flex;
-  gap: var(--s-lg);
-  align-items: flex-start;
-  background: rgba(253, 254, 251, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: var(--r-md);
-  padding: var(--s-lg);
-}
-
-.fact__num {
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: -0.2px;
-  font-feature-settings: "tnum";
-  color: var(--primary-deep);
-  min-width: 56px;
-  white-space: nowrap;
-}
-
-.fact__text {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--ink-secondary);
-}
-
-/* ---- Two-up grid --------------------------------------------------------- */
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--s-xl);
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-xl);
-}
-
-.taglist {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-sm);
-  margin-top: var(--s-lg);
-}
-
-.tag {
-  font-size: 13px;
-  letter-spacing: -0.2px;
-  color: var(--ink-secondary);
-  background: var(--canvas-sage);
+.dialog {
+  width: min(400px, calc(100vw - 32px));
+  padding: var(--s-xl);
   border: 1px solid var(--hairline);
-  border-radius: var(--r-pill);
-  padding: 6px 12px;
-}
-
-.card__label {
-  display: block;
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.1px;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: var(--s-md);
-}
-
-/* ---- Contact ------------------------------------------------------------- */
-
-.contact {
-  position: relative;
-  overflow: hidden;
   border-radius: var(--r-xl);
-  background: var(--brand-dark-900);
-  color: var(--canvas);
-  padding: var(--s-huge);
+  background: var(--canvas);
+  color: var(--ink);
+  box-shadow: 0 24px 64px rgba(42, 51, 42, 0.22);
 }
 
-.contact::before {
-  content: "";
-  position: absolute;
-  width: 620px;
-  height: 620px;
-  right: -180px;
-  top: -280px;
-  border-radius: var(--r-pill);
-  background: radial-gradient(
-    circle,
-    rgba(109, 143, 105, 0.55) 0%,
-    rgba(43, 107, 94, 0.18) 45%,
-    rgba(20, 34, 20, 0) 70%
-  );
-  pointer-events: none;
+.dialog::backdrop {
+  background: rgba(42, 51, 42, 0.38);
+  backdrop-filter: blur(3px);
 }
 
-.contact__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 62ch;
-}
-
-.contact .lead {
-  color: var(--primary-subdued);
-  margin: var(--s-lg) 0 0;
-}
-
-.contact__list {
-  display: grid;
-  gap: 1px;
-  margin-top: 40px;
-  background: rgba(225, 230, 223, 0.16);
-  border: 1px solid rgba(225, 230, 223, 0.16);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-.contact__row {
+.dialog__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--s-lg);
-  padding: var(--s-lg) var(--s-xl);
-  background: var(--brand-dark-900);
+  margin-bottom: var(--s-xl);
+}
+
+.dialog__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-mute);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dialog__close:hover {
+  background: var(--canvas-sage);
+  color: var(--ink);
+}
+
+.dialog__list {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.dialog__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-lg);
+  padding: var(--s-lg);
+  background: var(--canvas);
   text-decoration: none;
   transition: background-color 0.15s ease;
 }
 
-.contact__row:hover {
-  background: #1b2c1b;
+.dialog__row:hover {
+  background: var(--canvas-sage);
 }
 
-.contact__key {
-  font-size: 10px;
-  letter-spacing: 0.1px;
-  text-transform: uppercase;
-  color: var(--primary-subdued);
+.dialog__key {
+  font-size: 13px;
+  color: var(--ink-mute);
 }
 
-.contact__val {
-  font-size: 16px;
-  font-feature-settings: "tnum";
-  letter-spacing: -0.2px;
+.dialog__val {
+  font-size: 15px;
   text-align: right;
   word-break: break-word;
 }
@@ -811,7 +471,7 @@ a:focus-visible {
 /* ---- Footer -------------------------------------------------------------- */
 
 .footer {
-  padding: var(--s-huge) 0;
+  padding-bottom: var(--s-huge);
   color: var(--ink-mute);
 }
 
@@ -825,15 +485,6 @@ a:focus-visible {
   border-top: 1px solid var(--hairline);
 }
 
-.footer a {
-  text-decoration: none;
-  color: var(--primary);
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
 /* ---- Responsive ---------------------------------------------------------- */
 
 @media (max-width: 1023px) {
@@ -841,43 +492,47 @@ a:focus-visible {
     padding: 72px 0;
   }
 
-  .display-xxl {
-    font-size: 44px;
-    letter-spacing: -1px;
+  /* Soft halo so the copy clears the painting's busy mid-ground. */
+.hero__copy {
+  position: relative;
+}
+
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -56px -96px -56px -140px;
+  background: radial-gradient(
+    ellipse at 42% 50%,
+    rgba(253, 254, 251, 0.95) 0%,
+    rgba(253, 254, 251, 0.8) 42%,
+    rgba(253, 254, 251, 0) 74%
+  );
+}
+
+.hero__title {
+    font-size: 48px;
+    letter-spacing: -1.1px;
   }
 
   .hero__inner {
     grid-template-columns: 1fr;
-    gap: 48px;
-    padding-block: 56px 72px;
+    gap: 40px;
+    padding-block: 120px 72px;
   }
 
   .hero__portrait {
-    max-width: 380px;
-    margin-inline: auto;
+    max-width: 340px;
   }
 
-  .about {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .about__media {
-    position: static;
-    max-width: 320px;
-  }
-
-  .band__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
+  /* The painting has no light gutter to hide behind in one column. */
+  .hero__bg::before {
+    background: linear-gradient(
+      180deg,
+      rgba(253, 254, 251, 0.9) 0%,
+      rgba(253, 254, 251, 0.78) 55%,
+      rgba(253, 254, 251, 0.5) 100%
+    );
   }
 }
 
@@ -886,14 +541,31 @@ a:focus-visible {
     padding: 56px 0;
   }
 
-  .display-xxl {
+  /* Soft halo so the copy clears the painting's busy mid-ground. */
+.hero__copy {
+  position: relative;
+}
+
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -56px -96px -56px -140px;
+  background: radial-gradient(
+    ellipse at 42% 50%,
+    rgba(253, 254, 251, 0.95) 0%,
+    rgba(253, 254, 251, 0.8) 42%,
+    rgba(253, 254, 251, 0) 74%
+  );
+}
+
+.hero__title {
     font-size: 36px;
     letter-spacing: -0.8px;
   }
 
-  .display-xl {
-    font-size: 32px;
-    letter-spacing: -0.64px;
+  .hero__text {
+    font-size: 17px;
   }
 
   .display-lg {
@@ -901,18 +573,12 @@ a:focus-visible {
     letter-spacing: -0.4px;
   }
 
-  .nav__links {
-    display: none;
+  .nav__mark {
+    font-size: 20px;
   }
 
   .btn {
     min-height: 44px;
-  }
-
-  .stats,
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
   }
 
   .role {
@@ -921,27 +587,12 @@ a:focus-visible {
     padding: var(--s-xl);
   }
 
-  .band,
-  .contact {
-    padding: var(--s-xxl) var(--s-xl);
-  }
-
-  .contact__row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--s-xs);
-  }
-
-  .contact__val {
-    text-align: left;
+  .hero__portrait {
+    max-width: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   * {
     transition-duration: 0.01ms !important;
   }
