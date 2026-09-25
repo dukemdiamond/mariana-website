@@ -43,6 +43,7 @@
   --lift-2: 0 8px 24px rgba(42, 51, 42, 0.12), 0 2px 6px rgba(42, 51, 42, 0.06);
 
   --container: 1120px;
+  --nav-h: 82px;
 }
 
 /* ---- Reset --------------------------------------------------------------- */
@@ -193,7 +194,6 @@ h3 {
 }
 
 .btn:focus-visible,
-.dialog__close:focus-visible,
 a:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
@@ -202,14 +202,27 @@ a:focus-visible {
 
 /* ---- Nav ----------------------------------------------------------------- */
 
-/* Sits on the painting: no background, no rule, no chrome. */
+/* Transparent over the painting; picks up a soft fill once it scrolls off,
+   so it never draws a hard edge against the artwork. */
 .nav {
-  position: absolute;
-  inset: 0 0 auto 0;
+  position: sticky;
+  top: 0;
   z-index: 10;
+  background: transparent;
+  transition: background-color 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+.nav--stuck {
+  background: rgba(253, 254, 251, 0.82);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
 }
 
 .nav__inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-xl);
   padding-block: var(--s-xl);
 }
 
@@ -218,6 +231,23 @@ a:focus-visible {
   letter-spacing: -0.3px;
   text-decoration: none;
   color: var(--ink);
+  white-space: nowrap;
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--s-xl);
+}
+
+.nav__links a {
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--ink-secondary);
+  transition: color 0.15s ease;
+}
+
+.nav__links a:hover {
+  color: var(--primary);
 }
 
 /* ---- Hero ---------------------------------------------------------------- */
@@ -229,7 +259,7 @@ a:focus-visible {
 
 .hero__bg {
   position: absolute;
-  inset: 0;
+  inset: calc(var(--nav-h) * -1) 0 0 0;
   z-index: -1;
   background-image: url("assets/monet-antibes.jpg");
   background-size: cover;
@@ -262,11 +292,11 @@ a:focus-visible {
 
 .hero__inner {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr auto;
   gap: var(--s-huge);
   align-items: center;
-  min-height: 640px;
-  padding-block: 136px 104px;
+  min-height: 520px;
+  padding-block: 56px 104px;
 }
 
 /* Soft halo so the copy clears the painting's busy mid-ground. */
@@ -303,9 +333,12 @@ a:focus-visible {
 }
 
 .hero__portrait {
+  justify-self: end;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
   border-radius: var(--r-lg);
   overflow: hidden;
-  aspect-ratio: 27 / 40;
   border: 6px solid var(--canvas);
   box-shadow: 0 18px 48px rgba(42, 51, 42, 0.26),
     0 2px 8px rgba(42, 51, 42, 0.12);
@@ -387,85 +420,66 @@ a:focus-visible {
   background: var(--primary-soft);
 }
 
-/* ---- Contact dialog ------------------------------------------------------ */
+/* ---- Icon links ---------------------------------------------------------- */
 
-.dialog {
-  width: min(400px, calc(100vw - 32px));
-  padding: var(--s-xl);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-xl);
-  background: var(--canvas);
-  color: var(--ink);
-  box-shadow: 0 24px 64px rgba(42, 51, 42, 0.22);
-}
-
-.dialog::backdrop {
-  background: rgba(42, 51, 42, 0.38);
-  backdrop-filter: blur(3px);
-}
-
-.dialog__head {
+.links {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-lg);
-  margin-bottom: var(--s-xl);
+  flex-wrap: wrap;
+  gap: var(--s-md);
 }
 
-.dialog__close {
-  display: flex;
+.icon-link {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 0;
+  gap: var(--s-sm);
+  min-height: 40px;
+  padding: var(--s-sm) var(--s-lg) var(--s-sm) var(--s-md);
+  border: 1px solid var(--hairline-strong);
   border-radius: var(--r-pill);
-  background: transparent;
-  color: var(--ink-mute);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
+  background: rgba(253, 254, 251, 0.72);
+  color: var(--ink-secondary);
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.dialog__close:hover {
+.icon-link svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.15s ease;
+}
+
+.icon-link:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.icon-link:hover svg {
+  stroke: var(--on-primary);
+}
+
+.links--footer .icon-link {
+  border-color: transparent;
+  background: transparent;
+  padding-inline: var(--s-sm);
+  font-size: 14px;
+}
+
+.links--footer .icon-link:hover {
   background: var(--canvas-sage);
   color: var(--ink);
 }
 
-.dialog__list {
-  display: grid;
-  gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-.dialog__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-lg);
-  padding: var(--s-lg);
-  background: var(--canvas);
-  text-decoration: none;
-  transition: background-color 0.15s ease;
-}
-
-.dialog__row:hover {
-  background: var(--canvas-sage);
-}
-
-.dialog__key {
-  font-size: 13px;
-  color: var(--ink-mute);
-}
-
-.dialog__val {
-  font-size: 15px;
-  text-align: right;
-  word-break: break-word;
+.links--footer .icon-link:hover svg {
+  stroke: var(--primary);
 }
 
 /* ---- Footer -------------------------------------------------------------- */
@@ -518,11 +532,16 @@ a:focus-visible {
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 40px;
-    padding-block: 120px 72px;
+    padding-block: 48px 72px;
   }
 
   .hero__portrait {
-    max-width: 340px;
+    justify-self: start;
+    max-width: 260px;
+  }
+
+  .hero__bg {
+    inset: calc(var(--nav-h) * -1) 0 0 0;
   }
 
   /* The painting has no light gutter to hide behind in one column. */
@@ -537,6 +556,10 @@ a:focus-visible {
 }
 
 @media (max-width: 767px) {
+  :root {
+    --nav-h: 74px;
+  }
+
   .section {
     padding: 56px 0;
   }
@@ -588,7 +611,7 @@ a:focus-visible {
   }
 
   .hero__portrait {
-    max-width: none;
+    max-width: 220px;
   }
 }
 
